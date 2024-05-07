@@ -6,4 +6,6 @@ router.get("/", (req, res) => {
   res.send("Hello World! from routes");
 });
 
+router.use("/employees", require("./employee")); // This is the route that the frontend will call to get all employees
+
 module.exports = router; // Export the router so that it can be used in backend/app.js
