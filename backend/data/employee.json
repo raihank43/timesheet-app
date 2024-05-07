@@ -1,0 +1,14 @@
+[
+  {
+    "name": "John Doe",
+    "rate": 12000
+  },
+  {
+    "name": "Jane Smith",
+    "rate": 13000
+  },
+  {
+    "name": "Michael Johnson",
+    "rate": 15000
+  }
+]
