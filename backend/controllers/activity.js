@@ -47,4 +47,31 @@ module.exports = class ActivityController {
         : res.status(400).json({ message: error.message });
     }
   }
+
+  static async updateActivity(req, res) {
+    try {
+      const { id } = req.params;
+      const { title, ProjectId, startDate, endDate, timeStart, timeEnd } =
+        req.body;
+      const duration = calculateDuration(timeStart, timeEnd);
+      const activity = await Activity.findByPk(id);
+      if (!activity) {
+        return res.status(404).json({ message: "Activity not found" });
+      }
+      await activity.update({
+        title,
+        ProjectId,
+        startDate,
+        endDate,
+        timeStart,
+        timeEnd,
+        duration,
+      });
+      res.status(200).json(activity);
+    } catch (error) {
+      error.name === "SequelizeValidationError"
+        ? res.status(400).json({ message: error.errors[0].message })
+        : res.status(400).json({ message: error.message });
+    }
+  }
 };
