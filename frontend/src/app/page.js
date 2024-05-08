@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-export default function Home() {
+async function fetchEmployee() {
+  const response = await fetch("http://localhost:3001/employees");
+  const data = await response.json();
+  return data;
+}
+
+export default async function Home() {
+  const employees = await fetchEmployee();
+  console.log(employees);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -8,6 +16,14 @@ export default function Home() {
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.js</code>
         </p>
+        {employees.map((employee) => (
+          <div
+            key={employee.id}
+            className="flex flex-col items-center justify-center gap-4 p-4 border border-gray-300 rounded-lg dark:border-neutral-700 lg:flex-row lg:gap-8 lg:items-start lg:justify-start"
+          >
+            <p className="text-white">{employee.name}</p>
+          </div>
+        ))}
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
