@@ -6,5 +6,6 @@ router.get("/", ActivityController.getAllActivities); // This is the route that 
 router.get("/:EmployeeId", ActivityController.getEmployeeActivities); // This is the route that the frontend will call to get all activities for a specific employee
 router.post("/:EmployeeId", ActivityController.createActivity); // This is the route that the frontend will call to add an activity for a specific employee
 router.put("/:id", ActivityController.updateActivity); // This is the route that the frontend will call to update an activity
+router.delete("/:id", ActivityController.deleteActivity); // This is the route that the frontend will call to delete an activity
 
 module.exports = router;

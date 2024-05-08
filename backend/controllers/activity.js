@@ -74,4 +74,20 @@ module.exports = class ActivityController {
         : res.status(400).json({ message: error.message });
     }
   }
+
+  static async deleteActivity(req, res) {
+    try {
+      const { id } = req.params;
+      const activity = await Activity.findByPk(id);
+      if (!activity) {
+        return res.status(404).json({ message: "Activity not found" });
+      }
+      await activity.destroy();
+      res
+        .status(200)
+        .json({ message: `Activity ${activity.title} succesfully deleted` });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 };
