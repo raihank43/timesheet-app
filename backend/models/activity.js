@@ -87,9 +87,6 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Start time cannot be empty",
           },
-          isTime: {
-            msg: "Start time must be a valid time",
-          },
         },
       },
       timeEnd: {
@@ -101,9 +98,6 @@ module.exports = (sequelize, DataTypes) => {
           },
           notEmpty: {
             msg: "End time cannot be empty",
-          },
-          isTime: {
-            msg: "End time must be a valid time",
           },
         },
       },
