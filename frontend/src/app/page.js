@@ -1,7 +1,8 @@
 import Image from "next/image";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 async function fetchEmployee() {
-  const response = await fetch("http://localhost:3001/employees");
+  const response = await fetch(baseURL + "employees");
   const data = await response.json();
   return data;
 }

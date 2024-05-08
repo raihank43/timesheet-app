@@ -1,3 +1,5 @@
 .env
 node_modules
 timesheet.pem
+example.js
+notes.txt
