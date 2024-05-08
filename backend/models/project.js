@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {
     /**
@@ -17,6 +17,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
+          isUnique: async function (value, next) {
+            try {
+              const project = await Project.findOne({
+                where: Sequelize.where(
+                  Sequelize.fn("lower", Sequelize.col("name")),
+                  Sequelize.fn("lower", value)
+                ),
+              });
+              if (project) {
+                return next("Project name already in use");
+              }
+              next();
+            } catch (error) {
+              next(error);
+            }
+          },
           notNull: {
             msg: "Name is required",
           },
