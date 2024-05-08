@@ -8,5 +8,6 @@ router.get("/", (req, res) => {
 
 router.use("/employees", require("./employee")); // This is the route for the employees API
 router.use("/projects", require("./project")); // This is the route for the projects API
+router.use("/activities", require("./activity")); // This is the route for the activities API
 
 module.exports = router; // Export the router so that it can be used in backend/app.js
