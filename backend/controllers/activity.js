@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Activity, Project } = require("../models");
 const calculateDuration = require("../utils/calculateDuration");
 
@@ -14,10 +15,19 @@ module.exports = class ActivityController {
   static async getEmployeeActivities(req, res) {
     try {
       const { EmployeeId } = req.params;
+      const { ProjectIds } = req.query; // get ProjectIds from query parameters
+      const whereClause = { EmployeeId };
+
+      if (ProjectIds) {
+        const projectIdsArray = ProjectIds.split(","); // convert comma-separated string to array
+        whereClause.ProjectId = { [Op.in]: projectIdsArray };
+      }
+
       const activities = await Activity.findAll({
         include: [{ model: Project }],
-        where: { EmployeeId },
+        where: whereClause,
       });
+
       res.status(200).json(activities);
     } catch (error) {
       res.status(500).json({ message: error.message });
