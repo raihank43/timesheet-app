@@ -9,4 +9,15 @@ module.exports = class EmployeeController {
       res.status(500).json({ error: error.message });
     }
   }
+  static async addEmployee(req, res) {
+    try {
+      const { name, rate } = req.body;
+      const employee = await Employee.create({ name, rate });
+      res.status(201).json(employee);
+    } catch (error) {
+      error.name === "SequelizeValidationError"
+        ? res.status(400).json({ error: error.errors[0].message })
+        : res.status(500).json({ error: error.message });
+    }
+  }
 };
