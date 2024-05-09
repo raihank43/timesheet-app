@@ -1,7 +1,17 @@
 # Timesheet App
 
 The Timesheet App is a tool designed to track the activities of freelancers. It allows you to add employees, set their hourly rates in Indonesian Rupiah, and record their activities with details such as activity title, project name, start date, end date, start time, end time, duration, and total hours.
+## Tech Stack
 
+The Timesheet App is built using the following technologies:
+
+- **Supabase(PostgreSQL)**: A powerful open-source alternative to Firebase for backend services and database management.
+- **Express.js**: A fast and minimalist web application framework for Node.js.
+- **Next.js**: A React framework for building server-side rendered and static websites.
+- **Vercel**: A cloud platform for static sites and serverless functions, used for deployment.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
+
+These technologies work together to provide a robust and efficient solution for tracking freelancer activities in the Timesheet App.
 ## Features
 
 - **Add Employees**: You can add employees to the app by providing their details such as name, position, and hourly rate in Indonesian Rupiah.
