@@ -24,8 +24,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
-  /* color: rgb(var(--foreground-rgb));
-  background: var(--joy-palette-background-default); */
+  color: rgb(var(--foreground-rgb));
+  background: var(--joy-palette-background-default);
 }
 
 @layer utilities {

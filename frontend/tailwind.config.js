@@ -7,10 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // colors: {
-      //   "background-default": "#F7F8FB",
-      //   "custom-blue": "#2775EC",
-      // },
+      colors: {
+        "background-default": "#F7F8FB",
+        "custom-blue": "#2775EC",
+        "light-blue": "#F0F6FF",
+        "custom-red": "#F15858"
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

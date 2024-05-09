@@ -13,18 +13,9 @@ async function fetchEmployees() {
 export default async function Home() {
   const employees = await fetchEmployees();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 ">
-      {employees.map((employee) => (
-        <div
-          key={employee.id}
-          className="flex flex-col items-center justify-center "
-        >
-          <h2 className="text-2xl font-bold text-black">{employee.name}</h2>
-        </div>
-      ))}
-      <ButtonComponent />
-
+    <main className=" min-h-full m-6">
       <TableComponent />
+      
     </main>
   );
 }

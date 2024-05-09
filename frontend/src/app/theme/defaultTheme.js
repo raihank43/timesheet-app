@@ -1,3 +1,4 @@
+"use client";
 import { extendTheme } from "@mui/joy/styles";
 
 const defaultTheme = extendTheme({
@@ -5,19 +6,19 @@ const defaultTheme = extendTheme({
     light: {
       palette: {
         // affects all Joy components that has `color="primary"` prop.
-        primary: {
-          50: "#fffbeb",
-          100: "#fef3c7",
-          200: "#fde68a",
-          // 300, 400, ..., 800,
-          900: "#78350f",
+        background: {
+          body: "#F7F8FB", // Set the default background color
         },
       },
     },
-  },
-  fontFamily: {
-    display: "Inter, var(--joy-fontFamily-fallback)",
-    body: "Inter, var(--joy-fontFamily-fallback)",
+    dark: {
+      palette: {
+        // affects all Joy components that has `color="primary"` prop.
+        background: {
+          body: "#1A202C", // Set the default background color
+        },
+      },
+    },
   },
 });
 

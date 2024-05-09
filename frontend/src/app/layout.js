@@ -1,9 +1,8 @@
 import { Inter, Nunito, Poppins } from "next/font/google";
 import "./globals.css";
 import "@fontsource-variable/nunito";
-import ThemeRegistry from "./ThemeRegistry";
 import { CssBaseline, CssVarsProvider } from "@mui/joy";
-import githubTheme from "./theme/githubTheme";
+import HeaderComponent from "./components/HeaderComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 const nunito = Nunito({ subsets: ["latin"] });
@@ -19,7 +18,10 @@ export default function RootLayout({ children }) {
       <body className={nunito.className}>
         <CssVarsProvider>
           <CssBaseline />
-          {children}
+          <HeaderComponent />
+          <main className="flex min-h-screen flex-col items-center justify-between bg-background-default">
+            {children}
+          </main>
         </CssVarsProvider>
       </body>
     </html>
