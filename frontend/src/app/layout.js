@@ -3,6 +3,7 @@ import "./globals.css";
 import "@fontsource-variable/nunito";
 import { CssBaseline, CssVarsProvider } from "@mui/joy";
 import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 const nunito = Nunito({ subsets: ["latin"] });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
           <main className="flex min-h-screen flex-col items-center justify-between bg-background-default">
             {children}
           </main>
+          <FooterComponent />
         </CssVarsProvider>
       </body>
     </html>
