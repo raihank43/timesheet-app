@@ -4,11 +4,16 @@ import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
-export default function SelectProjectOption() {
+export default function SelectProjectOption({ projectName, setProjectName }) {
+  const handleChange = (event, newValue) => {
+    setProjectName(newValue);
+  };
+
   return (
     <Select
       placeholder="Pilih Proyek"
       indicator={<KeyboardArrowDown />}
+      onChange={handleChange}
       sx={{
         width: "100%",
         [`& .${selectClasses.indicator}`]: {
