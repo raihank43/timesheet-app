@@ -20,6 +20,8 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { visuallyHidden } from "@mui/utils";
 import EditIcon from "@mui/icons-material/Edit";
+import { Button } from "@mui/joy";
+import AddActivityButton from "./AddActivityButton";
 
 function createData(title, projectName, startDate, endDate, timeStart) {
   return {
@@ -330,7 +332,7 @@ function EnhancedTableToolbar(props) {
       sx={{
         display: "flex",
         alignItems: "center",
-        py: 1,
+        py: 3,
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
@@ -339,35 +341,31 @@ function EnhancedTableToolbar(props) {
         borderTopLeftRadius: "var(--unstable_actionRadius)",
         borderTopRightRadius: "var(--unstable_actionRadius)",
       }}
+      className="px-5"
     >
-      {numSelected > 0 ? (
-        <Typography sx={{ flex: "1 1 100%" }} component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
+      <Sheet
+        sx={{
+          flex: "1 1 100%",
+          display: "flex",
+        }}
+        className="flex-row items-center gap-5"
+      >
         <Typography
           level="body-lg"
-          sx={{ flex: "1 1 100%", fontWeight: "bold" }}
+          sx={{ fontWeight: "bold" }}
           id="tableTitle"
           component="div"
         >
           Daftar Kegiatan
         </Typography>
-      )}
+        <AddActivityButton />
+      </Sheet>
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton size="sm" color="danger" variant="solid">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton size="sm" variant="outlined" color="neutral">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
+      <Tooltip title="Filter list">
+        <IconButton size="sm" variant="outlined" color="danger">
+          <FilterListIcon />
+        </IconButton>
+      </Tooltip>
     </Box>
   );
 }
