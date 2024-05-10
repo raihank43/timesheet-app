@@ -23,6 +23,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Button } from "@mui/joy";
 import AddActivityButton from "./AddActivityButton";
 import SearchInput from "./SearchInput";
+import FilterListButton from "./FilterListButton";
 
 function createData(title, projectName, startDate, endDate, timeStart) {
   return {
@@ -365,9 +366,7 @@ function EnhancedTableToolbar(props) {
       <Sheet className="flex flex-row gap-5">
         <SearchInput />
         <Tooltip title="Filter list">
-          <IconButton size="sm" variant="outlined" color="danger">
-            <FilterListIcon />
-          </IconButton>
+          <FilterListButton />
         </Tooltip>
       </Sheet>
     </Box>
