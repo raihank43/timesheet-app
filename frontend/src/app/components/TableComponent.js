@@ -459,7 +459,7 @@ export default function TableSortAndSelection() {
           "--TableCell-selectedBackground": (theme) =>
             theme.vars.palette.success.softBg,
           "& thead th:nth-child(1)": {
-            width: "40px",
+            width: "10px",
           },
           "& thead th:nth-child(2)": {
             width: "15%",
