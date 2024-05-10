@@ -1,49 +1,132 @@
-'use client'
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/joy/Box';
-import Table from '@mui/joy/Table';
-import Typography from '@mui/joy/Typography';
-import Sheet from '@mui/joy/Sheet';
-import Checkbox from '@mui/joy/Checkbox';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import IconButton from '@mui/joy/IconButton';
-import Link from '@mui/joy/Link';
-import Tooltip from '@mui/joy/Tooltip';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { visuallyHidden } from '@mui/utils';
+"use client";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/joy/Box";
+import Table from "@mui/joy/Table";
+import Typography from "@mui/joy/Typography";
+import Sheet from "@mui/joy/Sheet";
+import Checkbox from "@mui/joy/Checkbox";
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import IconButton from "@mui/joy/IconButton";
+import Link from "@mui/joy/Link";
+import Tooltip from "@mui/joy/Tooltip";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { visuallyHidden } from "@mui/utils";
+import EditIcon from "@mui/icons-material/Edit";
 
-function createData(name, calories, fat, carbs, protein) {
+function createData(title, projectName, startDate, endDate, timeStart) {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    title,
+    projectName,
+    startDate,
+    endDate,
+    timeStart,
   };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  {
+    id: 3,
+    title: "Code Review",
+    ProjectId: 2,
+    EmployeeId: 1,
+    startDate: "2022-12-02T00:00:00.000Z",
+    endDate: "2022-12-02T02:00:00.000Z",
+    timeStart: "10:00:00",
+    timeEnd: "12:00:00",
+    duration: 120,
+    createdAt: "2024-05-08T12:03:09.426Z",
+    updatedAt: "2024-05-08T12:03:09.426Z",
+    Project: {
+      id: 2,
+      name: "Dokumentasi",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
+  {
+    id: 7,
+    title: "Ngaret",
+    ProjectId: 2,
+    EmployeeId: 1,
+    startDate: "2022-12-04T00:00:00.000Z",
+    endDate: "2022-12-04T03:00:00.000Z",
+    timeStart: "08:00:00",
+    timeEnd: "12:00:00",
+    duration: 180,
+    createdAt: "2024-05-08T13:52:17.603Z",
+    updatedAt: "2024-05-08T13:52:17.603Z",
+    Project: {
+      id: 2,
+      name: "Dokumentasi",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
+  {
+    id: 9,
+    title: "tidur",
+    ProjectId: 2,
+    EmployeeId: 1,
+    startDate: "2022-12-04T00:00:00.000Z",
+    endDate: "2022-12-04T03:00:00.000Z",
+    timeStart: "09:00:00",
+    timeEnd: "12:00:00",
+    duration: 180,
+    createdAt: "2024-05-08T14:54:59.026Z",
+    updatedAt: "2024-05-08T23:54:39.472Z",
+    Project: {
+      id: 2,
+      name: "Dokumentasi",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
+  {
+    id: 13,
+    title: "Design Graphic",
+    ProjectId: 3,
+    EmployeeId: 1,
+    startDate: "2022-12-04T00:00:00.000Z",
+    endDate: "2022-12-04T03:00:00.000Z",
+    timeStart: "09:00:00",
+    timeEnd: "12:00:00",
+    duration: 180,
+    createdAt: "2024-05-09T00:05:04.975Z",
+    updatedAt: "2024-05-09T00:05:04.975Z",
+    Project: {
+      id: 3,
+      name: "Desain Logo",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
+  {
+    id: 5,
+    title: "Training Session",
+    ProjectId: 1,
+    EmployeeId: 3,
+    startDate: "2022-12-04T00:00:00.000Z",
+    endDate: "2022-12-04T03:00:00.000Z",
+    timeStart: "09:00:00",
+    timeEnd: "12:00:00",
+    duration: 180,
+    createdAt: "2024-05-08T12:03:09.426Z",
+    updatedAt: "2024-05-08T12:03:09.426Z",
+    Project: {
+      id: 1,
+      name: "UI Desain",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
 ];
 
 function labelDisplayedRows({ from, to, count }) {
@@ -51,17 +134,27 @@ function labelDisplayedRows({ from, to, count }) {
 }
 
 function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
+  if (orderBy.includes(".")) {
+    const [objectKey, property] = orderBy.split(".");
+    if (b[objectKey][property] < a[objectKey][property]) {
+      return -1;
+    }
+    if (b[objectKey][property] > a[objectKey][property]) {
+      return 1;
+    }
+  } else {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
   }
   return 0;
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -84,40 +177,64 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: "title",
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: "Judul Kegiatan",
   },
   {
-    id: 'calories',
-    numeric: true,
+    id: "Project.name",
+    numeric: false,
     disablePadding: false,
-    label: 'Calories',
+    label: "Nama Proyek",
   },
   {
-    id: 'fat',
+    id: "startDate",
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: "Tanggal Mulai",
   },
   {
-    id: 'carbs',
+    id: "endDate",
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: "Tanggal Berakhir",
   },
   {
-    id: 'protein',
+    id: "timeStart",
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: "Waktu Mulai",
+  },
+  {
+    id: "timeEnd",
+    numeric: true,
+    disablePadding: false,
+    label: "Waktu Berakhir",
+  },
+  {
+    id: "duration",
+    numeric: true,
+    disablePadding: false,
+    label: "Durasi",
+  },
+  {
+    id: "action",
+    numeric: true,
+    disablePadding: false,
+    label: "Aksi",
   },
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const {
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -132,10 +249,10 @@ function EnhancedTableHead(props) {
             onChange={onSelectAllClick}
             slotProps={{
               input: {
-                'aria-label': 'select all desserts',
+                "aria-label": "select all desserts",
               },
             }}
-            sx={{ verticalAlign: 'sub' }}
+            sx={{ verticalAlign: "sub" }}
           />
         </th>
         {headCells.map((headCell) => {
@@ -144,17 +261,19 @@ function EnhancedTableHead(props) {
             <th
               key={headCell.id}
               aria-sort={
-                active ? { asc: 'ascending', desc: 'descending' }[order] : undefined
+                active
+                  ? { asc: "ascending", desc: "descending" }[order]
+                  : undefined
               }
             >
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <Link
                 underline="none"
                 color="neutral"
-                textColor={active ? 'primary.plainColor' : undefined}
+                textColor={active ? "primary.plainColor" : undefined}
                 component="button"
                 onClick={createSortHandler(headCell.id)}
-                fontWeight="lg"
+                fontWeight="bold"
                 startDecorator={
                   headCell.numeric ? (
                     <ArrowDownwardIcon sx={{ opacity: active ? 1 : 0 }} />
@@ -166,18 +285,23 @@ function EnhancedTableHead(props) {
                   ) : null
                 }
                 sx={{
-                  '& svg': {
-                    transition: '0.2s',
+                  "& svg": {
+                    transition: "0.2s",
                     transform:
-                      active && order === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+                      active && order === "desc"
+                        ? "rotate(0deg)"
+                        : "rotate(180deg)",
                   },
-                  '&:hover': { '& svg': { opacity: 1 } },
+                  "&:hover": { "& svg": { opacity: 1 } },
+                  width: "1000px",
                 }}
               >
                 {headCell.label}
                 {active ? (
                   <Box component="span" sx={visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
                   </Box>
                 ) : null}
               </Link>
@@ -193,7 +317,7 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
@@ -204,30 +328,30 @@ function EnhancedTableToolbar(props) {
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         py: 1,
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
-          bgcolor: 'background.level1',
+          bgcolor: "background.level1",
         }),
-        borderTopLeftRadius: 'var(--unstable_actionRadius)',
-        borderTopRightRadius: 'var(--unstable_actionRadius)',
+        borderTopLeftRadius: "var(--unstable_actionRadius)",
+        borderTopRightRadius: "var(--unstable_actionRadius)",
       }}
     >
       {numSelected > 0 ? (
-        <Typography sx={{ flex: '1 1 100%' }} component="div">
+        <Typography sx={{ flex: "1 1 100%" }} component="div">
           {numSelected} selected
         </Typography>
       ) : (
         <Typography
           level="body-lg"
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%", fontWeight: "bold" }}
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Daftar Kegiatan
         </Typography>
       )}
 
@@ -253,15 +377,18 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function TableSortAndSelection() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    // console.log(property, "<<<<property");
+    // console.log(orderBy, "<<<<orderBy");
+    // console.log(order, "<<<<order");
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -287,7 +414,7 @@ export default function TableSortAndSelection() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -321,23 +448,23 @@ export default function TableSortAndSelection() {
   return (
     <Sheet
       variant="outlined"
-      sx={{ width: '100%', boxShadow: 'sm', borderRadius: 'sm' }}
+      sx={{ width: "100%", boxShadow: "sm", borderRadius: "sm" }}
     >
       <EnhancedTableToolbar numSelected={selected.length} />
       <Table
         aria-labelledby="tableTitle"
         hoverRow
         sx={{
-          '--TableCell-headBackground': 'transparent',
-          '--TableCell-selectedBackground': (theme) =>
+          "--TableCell-headBackground": "transparent",
+          "--TableCell-selectedBackground": (theme) =>
             theme.vars.palette.success.softBg,
-          '& thead th:nth-child(1)': {
-            width: '40px',
+          "& thead th:nth-child(1)": {
+            width: "40px",
           },
-          '& thead th:nth-child(2)': {
-            width: '30%',
+          "& thead th:nth-child(2)": {
+            width: "15%",
           },
-          '& tr > *:nth-child(n+3)': { textAlign: 'right' },
+          "& tr > *:nth-child(n+3)": { textAlign: "left" },
         }}
       >
         <EnhancedTableHead
@@ -366,10 +493,10 @@ export default function TableSortAndSelection() {
                   style={
                     isItemSelected
                       ? {
-                          '--TableCell-dataBackground':
-                            'var(--TableCell-selectedBackground)',
-                          '--TableCell-headBackground':
-                            'var(--TableCell-selectedBackground)',
+                          "--TableCell-dataBackground":
+                            "var(--TableCell-selectedBackground)",
+                          "--TableCell-headBackground":
+                            "var(--TableCell-selectedBackground)",
                         }
                       : {}
                   }
@@ -379,19 +506,29 @@ export default function TableSortAndSelection() {
                       checked={isItemSelected}
                       slotProps={{
                         input: {
-                          'aria-labelledby': labelId,
+                          "aria-labelledby": labelId,
                         },
                       }}
-                      sx={{ verticalAlign: 'top' }}
+                      sx={{ verticalAlign: "top" }}
                     />
                   </th>
                   <th id={labelId} scope="row">
-                    {row.name}
+                    {row.title}
                   </th>
-                  <td>{row.calories}</td>
-                  <td>{row.fat}</td>
-                  <td>{row.carbs}</td>
-                  <td>{row.protein}</td>
+                  <td>{row.Project.name}</td>
+                  <td>{row.startDate}</td>
+                  <td>{row.endDate}</td>
+                  <td>{row.timeStart}</td>
+                  <td>{row.timeEnd}</td>
+                  <td>{row.duration}</td>
+                  <td>
+                    <IconButton style={{ color: "red" }} color="warning">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton style={{ color: "red" }} color="warning">
+                      <DeleteIcon />
+                    </IconButton>
+                  </td>
                 </tr>
               );
             })}
@@ -399,7 +536,7 @@ export default function TableSortAndSelection() {
             <tr
               style={{
                 height: `calc(${emptyRows} * 40px)`,
-                '--TableRow-hoverBackground': 'transparent',
+                "--TableRow-hoverBackground": "transparent",
               }}
             >
               <td colSpan={6} aria-hidden />
@@ -408,18 +545,21 @@ export default function TableSortAndSelection() {
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={6}>
+            <td colSpan={9}>
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 2,
-                  justifyContent: 'flex-end',
+                  justifyContent: "flex-end",
                 }}
               >
                 <FormControl orientation="horizontal" size="sm">
                   <FormLabel>Rows per page:</FormLabel>
-                  <Select onChange={handleChangeRowsPerPage} value={rowsPerPage}>
+                  <Select
+                    onChange={handleChangeRowsPerPage}
+                    value={rowsPerPage}
+                  >
                     <Option value={5}>5</Option>
                     <Option value={10}>10</Option>
                     <Option value={25}>25</Option>
@@ -432,14 +572,14 @@ export default function TableSortAndSelection() {
                     count: rows.length === -1 ? -1 : rows.length,
                   })}
                 </Typography>
-                <Box sx={{ display: 'flex', gap: 1 }}>
+                <Box sx={{ display: "flex", gap: 1 }}>
                   <IconButton
                     size="sm"
                     color="neutral"
                     variant="outlined"
                     disabled={page === 0}
                     onClick={() => handleChangePage(page - 1)}
-                    sx={{ bgcolor: 'background.surface' }}
+                    sx={{ bgcolor: "background.surface" }}
                   >
                     <KeyboardArrowLeftIcon />
                   </IconButton>
@@ -453,7 +593,7 @@ export default function TableSortAndSelection() {
                         : false
                     }
                     onClick={() => handleChangePage(page + 1)}
-                    sx={{ bgcolor: 'background.surface' }}
+                    sx={{ bgcolor: "background.surface" }}
                   >
                     <KeyboardArrowRightIcon />
                   </IconButton>
