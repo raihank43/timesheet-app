@@ -28,7 +28,6 @@ async function fetchActivities(id) {
 export default async function Home() {
   const employees = await fetchEmployees();
   const employee = await fetchEmployee(1);
-  console.log(employee);
   return (
     <main className=" min-h-screen m-6 bg-white p-6 rounded-lg  shadow-2xl">
       <EmployeeDetail employees={employees} />

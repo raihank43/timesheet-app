@@ -24,6 +24,8 @@ import { Button } from "@mui/joy";
 import AddActivityButton from "./AddActivityButton";
 import SearchInput from "./SearchInput";
 import FilterListButton from "./FilterListButton";
+import formatDate from "../utils/formatDate";
+import convertMinutesToHours from "../utils/convertMinuteToHours";
 
 function createData(title, projectName, startDate, endDate, timeStart) {
   return {
@@ -127,6 +129,25 @@ const rows = [
     Project: {
       id: 1,
       name: "UI Desain",
+      createdAt: "2024-05-08T10:42:21.014Z",
+      updatedAt: "2024-05-08T10:42:21.014Z",
+    },
+  },
+  {
+    id: 6,
+    title: "Bug Fixing",
+    ProjectId: 2,
+    EmployeeId: 3,
+    startDate: "2022-12-05T00:00:00.000Z",
+    endDate: "2022-12-05T01:30:00.000Z",
+    timeStart: "13:00:00",
+    timeEnd: "14:30:00",
+    duration: 90,
+    createdAt: "2024-05-08T12:03:09.426Z",
+    updatedAt: "2024-05-08T12:03:09.426Z",
+    Project: {
+      id: 2,
+      name: "Dokumentasi",
       createdAt: "2024-05-08T10:42:21.014Z",
       updatedAt: "2024-05-08T10:42:21.014Z",
     },
@@ -517,11 +538,11 @@ export default function TableSortAndSelection() {
                     {row.title}
                   </th>
                   <td>{row.Project.name}</td>
-                  <td>{row.startDate}</td>
-                  <td>{row.endDate}</td>
+                  <td>{formatDate(row.startDate)}</td>
+                  <td>{formatDate(row.endDate)}</td>
                   <td>{row.timeStart}</td>
                   <td>{row.timeEnd}</td>
-                  <td>{row.duration}</td>
+                  <td>{convertMinutesToHours(row.duration)}</td>
                   <td>
                     <IconButton style={{ color: "red" }} color="warning">
                       <EditIcon />
