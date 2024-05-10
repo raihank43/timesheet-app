@@ -243,7 +243,7 @@ function EnhancedTableHead(props) {
     <thead>
       <tr>
         <th>
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
@@ -253,7 +253,7 @@ function EnhancedTableHead(props) {
               },
             }}
             sx={{ verticalAlign: "sub" }}
-          />
+          /> */}
         </th>
         {headCells.map((headCell) => {
           const active = orderBy === headCell.id;
@@ -484,11 +484,11 @@ export default function TableSortAndSelection() {
 
               return (
                 <tr
-                  onClick={(event) => handleClick(event, row.name)}
+                  // onClick={(event) => handleClick(event, row.name)}
                   role="checkbox"
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  key={row.name}
+                  key={row.id}
                   // selected={isItemSelected}
                   style={
                     isItemSelected
@@ -502,7 +502,7 @@ export default function TableSortAndSelection() {
                   }
                 >
                   <th scope="row">
-                    <Checkbox
+                    {/* <Checkbox
                       checked={isItemSelected}
                       slotProps={{
                         input: {
@@ -510,7 +510,7 @@ export default function TableSortAndSelection() {
                         },
                       }}
                       sx={{ verticalAlign: "top" }}
-                    />
+                    /> */}
                   </th>
                   <th id={labelId} scope="row">
                     {row.title}
