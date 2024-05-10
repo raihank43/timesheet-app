@@ -20,4 +20,16 @@ module.exports = class EmployeeController {
         : res.status(500).json({ error: error.message });
     }
   }
+
+  static async getEmployeeById(req, res) {
+    try {
+      const { id } = req.params;
+      const employee = await Employee.findByPk(id);
+      employee
+        ? res.status(200).json(employee)
+        : res.status(404).json({ error: "Employee not found" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 };
