@@ -26,6 +26,7 @@ import SearchInput from "./SearchInput";
 import FilterListButton from "./FilterListButton";
 import formatDate from "../utils/formatDate";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
+import formatTime from "../utils/formatTime";
 
 function createData(title, projectName, startDate, endDate, timeStart) {
   return {
@@ -540,8 +541,8 @@ export default function TableSortAndSelection() {
                   <td>{row.Project.name}</td>
                   <td>{formatDate(row.startDate)}</td>
                   <td>{formatDate(row.endDate)}</td>
-                  <td>{row.timeStart}</td>
-                  <td>{row.timeEnd}</td>
+                  <td>{formatTime(row.timeStart)}</td>
+                  <td>{formatTime(row.timeEnd)}</td>
                   <td>{convertMinutesToHours(row.duration)}</td>
                   <td>
                     <IconButton style={{ color: "red" }} color="warning">
