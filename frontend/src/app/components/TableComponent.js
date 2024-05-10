@@ -22,6 +22,7 @@ import { visuallyHidden } from "@mui/utils";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button } from "@mui/joy";
 import AddActivityButton from "./AddActivityButton";
+import SearchInput from "./SearchInput";
 
 function createData(title, projectName, startDate, endDate, timeStart) {
   return {
@@ -361,11 +362,14 @@ function EnhancedTableToolbar(props) {
         <AddActivityButton />
       </Sheet>
 
-      <Tooltip title="Filter list">
-        <IconButton size="sm" variant="outlined" color="danger">
-          <FilterListIcon />
-        </IconButton>
-      </Tooltip>
+      <Sheet className="flex flex-row gap-5">
+        <SearchInput />
+        <Tooltip title="Filter list">
+          <IconButton size="sm" variant="outlined" color="danger">
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+      </Sheet>
     </Box>
   );
 }
