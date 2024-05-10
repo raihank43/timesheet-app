@@ -5,6 +5,7 @@ import TableComponent from "./components/TableComponent";
 import ButtonComponent from "./components/ButtonComponent";
 import EmployeeDetail from "./components/EmployeeDetail";
 import convertMinutesToHours from "./utils/convertMinuteToHours";
+import formatRupiah from "./utils/formatRupiah";
 
 async function fetchEmployees() {
   const response = await fetch(`${baseURL}employees`);
@@ -45,7 +46,7 @@ export default async function Home() {
           <h1 className="text-custom-blue font-bold text-lg">
             {convertMinutesToHours(185)}
           </h1>
-          <h1 className="text-custom-blue font-black text-xl">{180000}</h1>
+          <h1 className="text-custom-blue font-black text-xl">{formatRupiah(180000)}</h1>
         </div>
       </div>
     </main>
