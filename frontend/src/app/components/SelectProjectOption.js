@@ -3,13 +3,18 @@ import * as React from "react";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+import AddProjectModal from "./AddProjectModal";
 
 export default function SelectProjectOption({ projectName, setProjectName }) {
+  const [open, setOpen] = React.useState(false);
+
   const handleChange = (event, newValue) => {
     setProjectName(newValue);
   };
 
-  return (
+  return open ? (
+    <AddProjectModal open={open} setOpen={setOpen} />
+  ) : (
     <Select
       placeholder="Pilih Proyek"
       indicator={<KeyboardArrowDown />}
@@ -29,6 +34,7 @@ export default function SelectProjectOption({ projectName, setProjectName }) {
         className="font-bold text-custom-red"
         onClick={() => {
           console.log("clicked");
+          setOpen(true);
         }}
       >
         + Tambah Proyek
