@@ -18,18 +18,25 @@ import ErrorSnackBar from "./ErrorSnackBar";
 import SuccessModal from "./SuccessModal";
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function AddActivityModal({
+export default function UpdateActivityModal({
   open,
   setOpen,
   selectedEmployee,
-  setEmployeeActivities,
+  fetchActivities,
+  data,
+  activityId,
 }) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [title, setTitle] = useState("");
-  const [projectId, setProjectId] = useState("");
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0];
+  }
+
+  const [startDate, setStartDate] = useState(formatDate(data.startDate));
+  const [endDate, setEndDate] = useState(formatDate(data.endDate));
+  const [startTime, setStartTime] = useState(data.timeStart);
+  const [endTime, setEndTime] = useState(data.timeEnd);
+  const [title, setTitle] = useState(data.title);
+  const [projectId, setProjectId] = useState(data.ProjectId);
   const [openError, setOpenError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
@@ -39,24 +46,10 @@ export default function AddActivityModal({
     setter(event.target.value);
   };
 
-  // console.log(
-  //   {
-  //     title,
-  //     projectId,
-  //     startDate,
-  //     endDate,
-  //     startTime,
-  //     endTime,
-  //     selectedEmployee,
-  //     selectedProjectName,
-  //   },
-  //   "<<< from add activity modal"
-  // );
-
   const handleSubmit = async () => {
     try {
-      const res = await fetch(`${baseURL}activities/${selectedEmployee}`, {
-        method: "POST",
+      const res = await fetch(`${baseURL}activities/${activityId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -73,11 +66,10 @@ export default function AddActivityModal({
       if (!res.ok) {
         throw new Error(data.message || "Something went wrong");
       }
-      data.Project = { name: selectedProjectName };
       setOpenSuccess(true);
       // setOpen(false);
 
-      setEmployeeActivities((prev) => [...prev, data]);
+      fetchActivities();
     } catch (error) {
       console.log(error, "<<<<< error from add activity");
       setErrorMessage(error.message);
@@ -91,6 +83,7 @@ export default function AddActivityModal({
         openSuccess={openSuccess}
         setOpenSuccess={setOpenSuccess}
         setOpen={setOpen}
+        update={true}
       />
       <ErrorSnackBar
         open={openError}
@@ -100,7 +93,7 @@ export default function AddActivityModal({
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog className="min-w-[500px] ">
           <DialogTitle className="font-bold pb-10">
-            Tambah Kegiatan Baru
+            Perbarui Kegiatan
           </DialogTitle>
           <form action={handleSubmit}>
             <ModalClose variant="plain" sx={{ m: 1 }} />
@@ -171,7 +164,7 @@ export default function AddActivityModal({
                   color="danger"
                   className="bg-custom-red"
                 >
-                  Simpan
+                  Perbarui
                 </Button>
               </Sheet>
             </Stack>

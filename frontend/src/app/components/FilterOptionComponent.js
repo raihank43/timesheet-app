@@ -1,18 +1,30 @@
 "use client";
 import * as React from "react";
 import Autocomplete from "@mui/joy/Autocomplete";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function FilterOptionComponent({ projectName, setProjectName }) {
+  const [projectList, setProjectList] = React.useState([]);
+
   const handleChange = (event, newValue) => {
     setProjectName(newValue);
   };
+
+  React.useEffect(() => {
+    async function fetchProjectList() {
+      const response = await fetch(`${baseURL}projects`);
+      const data = await response.json();
+      setProjectList(data);
+    }
+    fetchProjectList();
+  }, []);
   return (
     <Autocomplete
       multiple
       id="tags-default"
       placeholder="Nama Proyek"
-      options={top100Films}
-      getOptionLabel={(option) => option.title}
+      options={projectList}
+      getOptionLabel={(option) => option.name}
       value={projectName} // use value prop instead of defaultValue
       onChange={handleChange}
     />

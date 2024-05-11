@@ -5,11 +5,21 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import FilterListModal from "./FilterListModal";
 import { Filter } from "@mui/icons-material";
 
-export default function FilterListButton() {
+export default function FilterListButton({
+  projectName,
+  setProjectName,
+  handleFilter,
+}) {
   const [open, setOpen] = React.useState(false);
   return open ? (
     <>
-      <FilterListModal open={open} setOpen={setOpen} />
+      <FilterListModal
+        open={open}
+        setOpen={setOpen}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        handleFilter={handleFilter}
+      />
       <React.Fragment>
         <IconButton
           size="sm"
