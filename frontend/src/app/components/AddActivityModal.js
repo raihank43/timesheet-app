@@ -15,6 +15,7 @@ import { Sheet } from "@mui/joy";
 import SelectProjectOption from "./SelectProjectOption";
 import { useState } from "react";
 import ErrorSnackBar from "./ErrorSnackBar";
+import SuccessModal from "./SuccessModal";
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function AddActivityModal({
@@ -32,6 +33,7 @@ export default function AddActivityModal({
   const [openError, setOpenError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
+  const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleInput = (setter) => (event) => {
     setter(event.target.value);
@@ -72,7 +74,9 @@ export default function AddActivityModal({
         throw new Error(data.message || "Something went wrong");
       }
       data.Project = { name: selectedProjectName };
-      setOpen(false);
+      setOpenSuccess(true);
+      // setOpen(false);
+
       setEmployeeActivities((prev) => [...prev, data]);
     } catch (error) {
       console.log(error, "<<<<< error from add activity");
@@ -83,6 +87,11 @@ export default function AddActivityModal({
 
   return (
     <React.Fragment>
+      <SuccessModal
+        openSuccess={openSuccess}
+        setOpenSuccess={setOpenSuccess}
+        setOpen={setOpen}
+      />
       <ErrorSnackBar
         open={openError}
         setOpen={setOpenError}
