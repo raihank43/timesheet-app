@@ -14,6 +14,7 @@ export default function Home() {
   const [employeeActivities, setEmployeeActivities] = useState([]);
   const [employee, setEmployee] = useState(""); // detail for selected employee
   const [projectName, setProjectName] = useState([]);
+  const [searchActivity, setSearchActivity] = useState("");
 
   useEffect(() => {
     async function fetchEmployees() {
@@ -95,6 +96,8 @@ export default function Home() {
         projectName={projectName}
         setProjectName={setProjectName}
         handleFilter={handleFilter}
+        searchActivity={searchActivity}
+        setSearchActivity={setSearchActivity}
       />
 
       <div className="flex justify-between mt-4 p-6">
