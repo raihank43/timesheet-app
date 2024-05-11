@@ -27,6 +27,7 @@ import FilterListButton from "./FilterListButton";
 import formatDate from "../utils/formatDate";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
 import formatTime from "../utils/formatTime";
+import DeleteActivityButton from "./DeleteActivityButton";
 
 function labelDisplayedRows({ from, to, count }) {
   return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
@@ -280,6 +281,7 @@ export default function TableSortAndSelection({
   activities,
   selectedEmployee,
   setEmployeeActivities,
+  fetchActivities,
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -436,9 +438,10 @@ export default function TableSortAndSelection({
                       <IconButton style={{ color: "red" }} color="warning">
                         <EditIcon />
                       </IconButton>
-                      <IconButton style={{ color: "red" }} color="warning">
-                        <DeleteIcon />
-                      </IconButton>
+                      <DeleteActivityButton
+                        id={row.id}
+                        fetchActivities={fetchActivities}
+                      />
                     </td>
                   </tr>
                 );

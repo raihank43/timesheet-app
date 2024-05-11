@@ -22,14 +22,15 @@ export default function Home() {
     fetchEmployees();
   }, []);
 
-  useEffect(() => {
-    async function fetchActivities() {
-      if (!selectedEmployee) return;
+  async function fetchActivities() {
+    if (!selectedEmployee) return;
 
-      const response = await fetch(`${baseURL}activities/${selectedEmployee}`);
-      const data = await response.json();
-      setEmployeeActivities(data);
-    }
+    const response = await fetch(`${baseURL}activities/${selectedEmployee}`);
+    const data = await response.json();
+    setEmployeeActivities(data);
+  }
+
+  useEffect(() => {
     async function fetchEmployee() {
       const response = await fetch(`${baseURL}employees/${selectedEmployee}`);
       const data = await response.json();
@@ -62,6 +63,7 @@ export default function Home() {
         activities={employeeActivities}
         selectedEmployee={selectedEmployee}
         setEmployeeActivities={setEmployeeActivities}
+        fetchActivities={fetchActivities}
       />
 
       <div className="flex justify-between mt-4 p-6">
