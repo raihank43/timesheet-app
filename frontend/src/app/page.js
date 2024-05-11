@@ -73,8 +73,6 @@ export default function Home() {
 
   const overtime = calculateOvertime(employeeActivities, employee.rate);
 
-  console.log(overtime);
-
   // console.log(getIdsAsString(projectName), "<<<<< from page");
 
   return (
@@ -83,6 +81,10 @@ export default function Home() {
         employees={employees}
         onEmployeeSelect={setSelectedEmployee}
         employee={employee}
+        employeeActivities={employeeActivities}
+        duration={duration}
+        totalIncome={totalIncome}
+        overtime={overtime}
       />
 
       <TableComponent

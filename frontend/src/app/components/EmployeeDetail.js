@@ -6,6 +6,10 @@ export default function EmployeeDetail({
   employees,
   onEmployeeSelect,
   employee,
+  employeeActivities,
+  duration,
+  totalIncome,
+  overtime,
 }) {
   return (
     <div className="flex justify-between p-6  pt-0 ">
@@ -34,7 +38,13 @@ export default function EmployeeDetail({
       </div>
 
       <div className=" flex items-center">
-        <ExportCSVButton />
+        <ExportCSVButton
+          employeeActivities={employeeActivities}
+          employee={employee}
+          duration={duration}
+          totalIncome={totalIncome}
+          overtime={overtime}
+        />
       </div>
     </div>
   );
