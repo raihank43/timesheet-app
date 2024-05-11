@@ -1,6 +1,12 @@
+"use client";
+import formatRupiah from "../utils/formatRupiah";
 import ExportCSVButton from "./ExportCSVButton";
 
-export default function EmployeeDetail({ employees }) {
+export default function EmployeeDetail({
+  employees,
+  onEmployeeSelect,
+  employee,
+}) {
   return (
     <div className="flex justify-between p-6  pt-0 ">
       <div className="flex gap-10">
@@ -10,6 +16,7 @@ export default function EmployeeDetail({ employees }) {
             name="employee"
             id="employee"
             className="w-60 h-10 border border-gray-300 rounded-md text-black"
+            onChange={(e) => onEmployeeSelect(e.target.value)}
           >
             {employees.map((employee, index) => (
               <option key={index} value={employee.id} className="text-black">
@@ -20,7 +27,9 @@ export default function EmployeeDetail({ employees }) {
         </div>
         <div className="">
           <h1 className="text-xl font-bold text-gray-600">Rate</h1>
-          <p className="text-black">Rp 12.000 / hour</p>
+          <p className="text-black">
+            {employee.rate ? formatRupiah(employee.rate) : 0} / hour
+          </p>
         </div>
       </div>
 

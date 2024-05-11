@@ -46,7 +46,7 @@ export default function SettingPage() {
       }
       router.push("/");
     } catch (error) {
-      console.log(error, "<<<<<");
+      console.log(error, "<<<<< error from add employee");
       setErrorMessage(error.message);
       setOpen(true);
     }
