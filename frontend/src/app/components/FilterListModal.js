@@ -16,19 +16,31 @@ import SelectProjectOption from "./SelectProjectOption";
 import { useState } from "react";
 import FilterOptionComponent from "./FilterOptionComponent";
 
-export default function FilterListModal({ open, setOpen }) {
-  const [projectName, setProjectName] = useState([]);
+export default function FilterListModal({
+  open,
+  setOpen,
+  projectName,
+  setProjectName,
+  handleFilter,
+}) {
+  // const [projectName, setProjectName] = useState([]);
 
+  // console.log(projectName, "<<<<")
+  const onHandleFilter = (event) => {
+    handleFilter();
+    setOpen(false);
+  };
   return (
     <React.Fragment>
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog className="min-w-[500px] ">
           <DialogTitle className="font-bold pb-10">Filter</DialogTitle>
           <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              setOpen(false);
-            }}
+            action={onHandleFilter}
+            // onSubmit={(event) => {
+            //   event.preventDefault();
+            //   setOpen(false);
+            // }}
           >
             <ModalClose variant="plain" sx={{ m: 1 }} />
             <Stack spacing={2}>

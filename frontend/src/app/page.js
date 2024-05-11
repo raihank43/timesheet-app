@@ -5,12 +5,14 @@ import EmployeeDetail from "./components/EmployeeDetail";
 import convertMinutesToHours from "./utils/convertMinuteToHours";
 import formatRupiah from "./utils/formatRupiah";
 import { useState, useEffect } from "react";
+import getIdsAsString from "./utils/getIdsAsString";
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(1); // id for selected employee
   const [employeeActivities, setEmployeeActivities] = useState([]);
   const [employee, setEmployee] = useState(""); // detail for selected employee
+  const [projectName, setProjectName] = useState([]);
 
   useEffect(() => {
     async function fetchEmployees() {
@@ -41,6 +43,23 @@ export default function Home() {
     fetchEmployee();
   }, [selectedEmployee]);
 
+  // handling filters
+
+  // async function filterActivities () {
+  //   const response = await fetch(`${baseURL}activities/${selectedEmployee}?ProjectIds=${getIdsAsString(projectName)}`);
+  //   const data = await response.json();
+  //   setEmployeeActivities(data);
+  // }
+  const handleFilter = async () => {
+    const response = await fetch(
+      `${baseURL}activities/${selectedEmployee}?ProjectIds=${getIdsAsString(
+        projectName
+      )}`
+    );
+    const data = await response.json();
+    setEmployeeActivities(data);
+  };
+
   const duration = employeeActivities.reduce(
     (acc, activity) => acc + activity.duration,
     0
@@ -50,6 +69,8 @@ export default function Home() {
     (acc, activity) => acc + (activity.duration / 60) * employee.rate,
     0
   );
+
+  // console.log(getIdsAsString(projectName), "<<<<< from page");
 
   return (
     <main className=" min-h-screen m-6 bg-white p-6 rounded-lg  shadow-2xl">
@@ -64,6 +85,9 @@ export default function Home() {
         selectedEmployee={selectedEmployee}
         setEmployeeActivities={setEmployeeActivities}
         fetchActivities={fetchActivities}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        handleFilter={handleFilter}
       />
 
       <div className="flex justify-between mt-4 p-6">

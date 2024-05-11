@@ -223,7 +223,14 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected, selectedEmployee, setEmployeeActivities } = props;
+  const {
+    numSelected,
+    selectedEmployee,
+    setEmployeeActivities,
+    projectName,
+    setProjectName,
+    handleFilter
+  } = props;
 
   return (
     <Box
@@ -267,7 +274,11 @@ function EnhancedTableToolbar(props) {
         {/* <Tooltip title="Filter list">
          
         </Tooltip> */}
-        <FilterListButton />
+        <FilterListButton
+          projectName={projectName}
+          setProjectName={setProjectName}
+          handleFilter={handleFilter}
+        />
       </Sheet>
     </Box>
   );
@@ -282,6 +293,9 @@ export default function TableSortAndSelection({
   selectedEmployee,
   setEmployeeActivities,
   fetchActivities,
+  projectName,
+  setProjectName,
+  handleFilter
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -362,6 +376,9 @@ export default function TableSortAndSelection({
         numSelected={selected.length}
         selectedEmployee={selectedEmployee}
         setEmployeeActivities={setEmployeeActivities}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        handleFilter={handleFilter}
       />
       <Table
         aria-labelledby="tableTitle"
