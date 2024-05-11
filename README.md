@@ -13,8 +13,6 @@ The Timesheet App is built using the following technologies:
 - **Vercel**: A cloud platform for static sites and serverless functions, used for deployment.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
 
-These technologies work together to provide a robust and efficient solution for tracking freelancer activities in the Timesheet App.
-
 ## Usage
 
 You can try the app on my deployment website here: https://timesheet-hh.vercel.app/, 
@@ -72,7 +70,7 @@ Or if you want to use the Timesheet Management App locally, follow these steps:
 8. Set the environment variables:
      - If you are running the backend locally, create a file named `.env.local` in the frontend directory and set the following variable:
        ```
-       NEXT_PUBLIC_API_URL=http://localhost:3000/api
+       NEXT_PUBLIC_BASE_URL=http://localhost:3000/
        ```
 
      - If you are using the deployment server `timesheet.raihankusuma.tech`, no additional configuration is required.
