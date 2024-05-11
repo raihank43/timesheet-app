@@ -17,9 +17,9 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(1);
+  const [selectedEmployee, setSelectedEmployee] = useState(1); // id for selected employee
   const [employeeActivities, setEmployeeActivities] = useState([]);
-  const [employee, setEmployee] = useState("");
+  const [employee, setEmployee] = useState(""); // detail for selected employee
 
   useEffect(() => {
     async function fetchEmployees() {

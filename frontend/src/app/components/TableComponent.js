@@ -28,132 +28,122 @@ import formatDate from "../utils/formatDate";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
 import formatTime from "../utils/formatTime";
 
-function createData(title, projectName, startDate, endDate, timeStart) {
-  return {
-    title,
-    projectName,
-    startDate,
-    endDate,
-    timeStart,
-  };
-}
-
-const rows = [
-  {
-    id: 3,
-    title: "Code Review",
-    ProjectId: 2,
-    EmployeeId: 1,
-    startDate: "2022-12-02T00:00:00.000Z",
-    endDate: "2022-12-02T02:00:00.000Z",
-    timeStart: "10:00:00",
-    timeEnd: "12:00:00",
-    duration: 120,
-    createdAt: "2024-05-08T12:03:09.426Z",
-    updatedAt: "2024-05-08T12:03:09.426Z",
-    Project: {
-      id: 2,
-      name: "Dokumentasi",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-  {
-    id: 7,
-    title: "Ngaret",
-    ProjectId: 2,
-    EmployeeId: 1,
-    startDate: "2022-12-04T00:00:00.000Z",
-    endDate: "2022-12-04T03:00:00.000Z",
-    timeStart: "08:00:00",
-    timeEnd: "12:00:00",
-    duration: 180,
-    createdAt: "2024-05-08T13:52:17.603Z",
-    updatedAt: "2024-05-08T13:52:17.603Z",
-    Project: {
-      id: 2,
-      name: "Dokumentasi",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-  {
-    id: 9,
-    title: "tidur",
-    ProjectId: 2,
-    EmployeeId: 1,
-    startDate: "2022-12-04T00:00:00.000Z",
-    endDate: "2022-12-04T03:00:00.000Z",
-    timeStart: "09:00:00",
-    timeEnd: "12:00:00",
-    duration: 180,
-    createdAt: "2024-05-08T14:54:59.026Z",
-    updatedAt: "2024-05-08T23:54:39.472Z",
-    Project: {
-      id: 2,
-      name: "Dokumentasi",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-  {
-    id: 13,
-    title: "Design Graphic",
-    ProjectId: 3,
-    EmployeeId: 1,
-    startDate: "2022-12-04T00:00:00.000Z",
-    endDate: "2022-12-04T03:00:00.000Z",
-    timeStart: "09:00:00",
-    timeEnd: "12:00:00",
-    duration: 180,
-    createdAt: "2024-05-09T00:05:04.975Z",
-    updatedAt: "2024-05-09T00:05:04.975Z",
-    Project: {
-      id: 3,
-      name: "Desain Logo",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-  {
-    id: 5,
-    title: "Training Session",
-    ProjectId: 1,
-    EmployeeId: 3,
-    startDate: "2022-12-04T00:00:00.000Z",
-    endDate: "2022-12-04T03:00:00.000Z",
-    timeStart: "09:00:00",
-    timeEnd: "12:00:00",
-    duration: 180,
-    createdAt: "2024-05-08T12:03:09.426Z",
-    updatedAt: "2024-05-08T12:03:09.426Z",
-    Project: {
-      id: 1,
-      name: "UI Desain",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-  {
-    id: 6,
-    title: "Bug Fixing",
-    ProjectId: 2,
-    EmployeeId: 3,
-    startDate: "2022-12-05T00:00:00.000Z",
-    endDate: "2022-12-05T01:30:00.000Z",
-    timeStart: "13:00:00",
-    timeEnd: "14:30:00",
-    duration: 90,
-    createdAt: "2024-05-08T12:03:09.426Z",
-    updatedAt: "2024-05-08T12:03:09.426Z",
-    Project: {
-      id: 2,
-      name: "Dokumentasi",
-      createdAt: "2024-05-08T10:42:21.014Z",
-      updatedAt: "2024-05-08T10:42:21.014Z",
-    },
-  },
-];
+// const rows = [
+//   {
+//     id: 3,
+//     title: "Code Review",
+//     ProjectId: 2,
+//     EmployeeId: 1,
+//     startDate: "2022-12-02T00:00:00.000Z",
+//     endDate: "2022-12-02T02:00:00.000Z",
+//     timeStart: "10:00:00",
+//     timeEnd: "12:00:00",
+//     duration: 120,
+//     createdAt: "2024-05-08T12:03:09.426Z",
+//     updatedAt: "2024-05-08T12:03:09.426Z",
+//     Project: {
+//       id: 2,
+//       name: "Dokumentasi",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+//   {
+//     id: 7,
+//     title: "Ngaret",
+//     ProjectId: 2,
+//     EmployeeId: 1,
+//     startDate: "2022-12-04T00:00:00.000Z",
+//     endDate: "2022-12-04T03:00:00.000Z",
+//     timeStart: "08:00:00",
+//     timeEnd: "12:00:00",
+//     duration: 180,
+//     createdAt: "2024-05-08T13:52:17.603Z",
+//     updatedAt: "2024-05-08T13:52:17.603Z",
+//     Project: {
+//       id: 2,
+//       name: "Dokumentasi",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+//   {
+//     id: 9,
+//     title: "tidur",
+//     ProjectId: 2,
+//     EmployeeId: 1,
+//     startDate: "2022-12-04T00:00:00.000Z",
+//     endDate: "2022-12-04T03:00:00.000Z",
+//     timeStart: "09:00:00",
+//     timeEnd: "12:00:00",
+//     duration: 180,
+//     createdAt: "2024-05-08T14:54:59.026Z",
+//     updatedAt: "2024-05-08T23:54:39.472Z",
+//     Project: {
+//       id: 2,
+//       name: "Dokumentasi",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+//   {
+//     id: 13,
+//     title: "Design Graphic",
+//     ProjectId: 3,
+//     EmployeeId: 1,
+//     startDate: "2022-12-04T00:00:00.000Z",
+//     endDate: "2022-12-04T03:00:00.000Z",
+//     timeStart: "09:00:00",
+//     timeEnd: "12:00:00",
+//     duration: 180,
+//     createdAt: "2024-05-09T00:05:04.975Z",
+//     updatedAt: "2024-05-09T00:05:04.975Z",
+//     Project: {
+//       id: 3,
+//       name: "Desain Logo",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+//   {
+//     id: 5,
+//     title: "Training Session",
+//     ProjectId: 1,
+//     EmployeeId: 3,
+//     startDate: "2022-12-04T00:00:00.000Z",
+//     endDate: "2022-12-04T03:00:00.000Z",
+//     timeStart: "09:00:00",
+//     timeEnd: "12:00:00",
+//     duration: 180,
+//     createdAt: "2024-05-08T12:03:09.426Z",
+//     updatedAt: "2024-05-08T12:03:09.426Z",
+//     Project: {
+//       id: 1,
+//       name: "UI Desain",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+//   {
+//     id: 6,
+//     title: "Bug Fixing",
+//     ProjectId: 2,
+//     EmployeeId: 3,
+//     startDate: "2022-12-05T00:00:00.000Z",
+//     endDate: "2022-12-05T01:30:00.000Z",
+//     timeStart: "13:00:00",
+//     timeEnd: "14:30:00",
+//     duration: 90,
+//     createdAt: "2024-05-08T12:03:09.426Z",
+//     updatedAt: "2024-05-08T12:03:09.426Z",
+//     Project: {
+//       id: 2,
+//       name: "Dokumentasi",
+//       createdAt: "2024-05-08T10:42:21.014Z",
+//       updatedAt: "2024-05-08T10:42:21.014Z",
+//     },
+//   },
+// ];
 
 function labelDisplayedRows({ from, to, count }) {
   return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
@@ -399,12 +389,14 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function TableSortAndSelection() {
+export default function TableSortAndSelection({ activities }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const rows = activities;
 
   const handleRequestSort = (event, property) => {
     // console.log(property, "<<<<property");
@@ -499,33 +491,34 @@ export default function TableSortAndSelection() {
           rowCount={rows.length}
         />
         <tbody>
-          {stableSort(rows, getComparator(order, orderBy))
-            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((row, index) => {
-              const isItemSelected = isSelected(row.name);
-              const labelId = `enhanced-table-checkbox-${index}`;
+          {rows.length > 0 ? (
+            stableSort(rows, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                const isItemSelected = isSelected(row.name);
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-              return (
-                <tr
-                  // onClick={(event) => handleClick(event, row.name)}
-                  role="checkbox"
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  key={row.id}
-                  // selected={isItemSelected}
-                  style={
-                    isItemSelected
-                      ? {
-                          "--TableCell-dataBackground":
-                            "var(--TableCell-selectedBackground)",
-                          "--TableCell-headBackground":
-                            "var(--TableCell-selectedBackground)",
-                        }
-                      : {}
-                  }
-                >
-                  <th scope="row">
-                    {/* <Checkbox
+                return (
+                  <tr
+                    // onClick={(event) => handleClick(event, row.name)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.id}
+                    // selected={isItemSelected}
+                    style={
+                      isItemSelected
+                        ? {
+                            "--TableCell-dataBackground":
+                              "var(--TableCell-selectedBackground)",
+                            "--TableCell-headBackground":
+                              "var(--TableCell-selectedBackground)",
+                          }
+                        : {}
+                    }
+                  >
+                    <th scope="row">
+                      {/* <Checkbox
                       checked={isItemSelected}
                       slotProps={{
                         input: {
@@ -534,27 +527,35 @@ export default function TableSortAndSelection() {
                       }}
                       sx={{ verticalAlign: "top" }}
                     /> */}
-                  </th>
-                  <th id={labelId} scope="row">
-                    {row.title}
-                  </th>
-                  <td>{row.Project.name}</td>
-                  <td>{formatDate(row.startDate)}</td>
-                  <td>{formatDate(row.endDate)}</td>
-                  <td>{formatTime(row.timeStart)}</td>
-                  <td>{formatTime(row.timeEnd)}</td>
-                  <td>{convertMinutesToHours(row.duration)}</td>
-                  <td>
-                    <IconButton style={{ color: "red" }} color="warning">
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton style={{ color: "red" }} color="warning">
-                      <DeleteIcon />
-                    </IconButton>
-                  </td>
-                </tr>
-              );
-            })}
+                    </th>
+                    <th id={labelId} scope="row">
+                      {row.title}
+                    </th>
+                    <td>{row.Project.name}</td>
+                    <td>{formatDate(row.startDate)}</td>
+                    <td>{formatDate(row.endDate)}</td>
+                    <td>{formatTime(row.timeStart)}</td>
+                    <td>{formatTime(row.timeEnd)}</td>
+                    <td>{convertMinutesToHours(row.duration)}</td>
+                    <td>
+                      <IconButton style={{ color: "red" }} color="warning">
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton style={{ color: "red" }} color="warning">
+                        <DeleteIcon />
+                      </IconButton>
+                    </td>
+                  </tr>
+                );
+              })
+          ) : (
+            <tr>
+              <td colSpan="9" style={{ textAlign: "center" }} className="font-bold text-gray-400">
+                Belum ada kegiatan
+              </td>
+            </tr>
+          )}
+
           {emptyRows > 0 && (
             <tr
               style={{
