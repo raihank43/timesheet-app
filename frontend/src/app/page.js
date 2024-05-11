@@ -49,6 +49,15 @@ export default function Home() {
     fetchEmployee();
   }, [selectedEmployee]);
 
+  const duration = employeeActivities.reduce(
+    (acc, activity) => acc + activity.duration,
+    0
+  );
+
+  const totalIncome = employeeActivities.reduce(
+    (acc, activity) => acc + (activity.duration / 60) * employee.rate,
+    0
+  );
   return (
     <main className=" min-h-screen m-6 bg-white p-6 rounded-lg  shadow-2xl">
       <EmployeeDetail
@@ -69,10 +78,10 @@ export default function Home() {
 
         <div className="flex flex-col  justify-end items-end">
           <h1 className="text-custom-blue font-bold text-lg">
-            {convertMinutesToHours(185)}
+            {convertMinutesToHours(duration)}
           </h1>
           <h1 className="text-custom-blue font-black text-xl">
-            {formatRupiah(180000)}
+            {formatRupiah(totalIncome)}
           </h1>
         </div>
       </div>
