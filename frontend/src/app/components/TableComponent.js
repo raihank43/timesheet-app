@@ -231,6 +231,8 @@ function EnhancedTableToolbar(props) {
     projectName,
     setProjectName,
     handleFilter,
+    searchActivity,
+    setSearchActivity,
   } = props;
 
   return (
@@ -271,7 +273,10 @@ function EnhancedTableToolbar(props) {
       </Sheet>
 
       <Sheet className="flex flex-row gap-5">
-        <SearchInput />
+        <SearchInput
+          searchActivity={searchActivity}
+          setSearchActivity={setSearchActivity}
+        />
         {/* <Tooltip title="Filter list">
          
         </Tooltip> */}
@@ -297,6 +302,8 @@ export default function TableSortAndSelection({
   projectName,
   setProjectName,
   handleFilter,
+  searchActivity,
+  setSearchActivity,
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -380,6 +387,8 @@ export default function TableSortAndSelection({
         projectName={projectName}
         setProjectName={setProjectName}
         handleFilter={handleFilter}
+        searchActivity={searchActivity}
+        setSearchActivity={setSearchActivity}
       />
       <Table
         aria-labelledby="tableTitle"

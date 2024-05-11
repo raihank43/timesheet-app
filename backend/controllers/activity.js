@@ -15,12 +15,16 @@ module.exports = class ActivityController {
   static async getEmployeeActivities(req, res) {
     try {
       const { EmployeeId } = req.params;
-      const { ProjectIds } = req.query; // get ProjectIds from query parameters
+      const { ProjectIds, title } = req.query; // get ProjectIds and title from query parameters
       const whereClause = { EmployeeId };
 
       if (ProjectIds) {
         const projectIdsArray = ProjectIds.split(","); // convert comma-separated string to array
         whereClause.ProjectId = { [Op.in]: projectIdsArray };
+      }
+
+      if (title) {
+        whereClause.title = { [Op.iLike]: `%${title}%` }; // search title using like operator
       }
 
       const activities = await Activity.findAll({
