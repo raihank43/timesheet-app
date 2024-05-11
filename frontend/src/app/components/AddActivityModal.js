@@ -37,19 +37,19 @@ export default function AddActivityModal({
     setter(event.target.value);
   };
 
-  console.log(
-    {
-      title,
-      projectId,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
-      selectedEmployee,
-      selectedProjectName
-    },
-    "<<< from add activity modal"
-  );
+  // console.log(
+  //   {
+  //     title,
+  //     projectId,
+  //     startDate,
+  //     endDate,
+  //     startTime,
+  //     endTime,
+  //     selectedEmployee,
+  //     selectedProjectName,
+  //   },
+  //   "<<< from add activity modal"
+  // );
 
   const handleSubmit = async () => {
     try {
@@ -71,10 +71,9 @@ export default function AddActivityModal({
       if (!res.ok) {
         throw new Error(data.message || "Something went wrong");
       }
-
-      console.log(data, "<<<<< created Data");
+      data.Project = { name: selectedProjectName };
       setOpen(false);
-      // setEmployeeActivities((prev) => [...prev, data]);
+      setEmployeeActivities((prev) => [...prev, data]);
     } catch (error) {
       console.log(error, "<<<<< error from add activity");
       setErrorMessage(error.message);

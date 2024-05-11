@@ -50,7 +50,6 @@ export default function Home() {
     0
   );
 
-  console.log(employeeActivities, '<<<< employeeactivities')
   return (
     <main className=" min-h-screen m-6 bg-white p-6 rounded-lg  shadow-2xl">
       <EmployeeDetail
