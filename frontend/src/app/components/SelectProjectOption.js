@@ -15,13 +15,13 @@ export default function SelectProjectOption({
   const [open, setOpen] = React.useState(false);
   const [projects, setProjects] = React.useState([]);
 
-  React.useEffect(() => {
-    async function fetchProjects() {
-      const response = await fetch(`${baseURL}projects`);
-      const data = await response.json();
-      setProjects(data);
-    }
+  async function fetchProjects() {
+    const response = await fetch(`${baseURL}projects`);
+    const data = await response.json();
+    setProjects(data);
+  }
 
+  React.useEffect(() => {
     fetchProjects();
   }, []);
 
@@ -32,7 +32,11 @@ export default function SelectProjectOption({
   };
 
   return open ? (
-    <AddProjectModal open={open} setOpen={setOpen} />
+    <AddProjectModal
+      open={open}
+      setOpen={setOpen}
+      fetchProjects={fetchProjects}
+    />
   ) : (
     <Select
       placeholder="Pilih Proyek"
@@ -53,7 +57,7 @@ export default function SelectProjectOption({
         value="all"
         className="font-bold text-custom-red"
         onClick={() => {
-          console.log("clicked");
+          console.log("Add Project clicked");
           setOpen(true);
         }}
       >

@@ -14,13 +14,38 @@ import MenuItem from "@mui/joy/MenuItem";
 import { Sheet } from "@mui/joy";
 import SelectProjectOption from "./SelectProjectOption";
 import { useState } from "react";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function AddProjectModal({ open, setOpen }) {
+export default function AddProjectModal({ open, setOpen, fetchProjects }) {
   const [projectName, setProjectName] = useState("");
 
   const handleInput = (setter) => (event) => {
     setter(event.target.value);
   };
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(`${baseURL}projects`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: projectName,
+        }),
+      });
+      if (res.ok) {
+        fetchProjects();
+        setOpen(false);
+      } else {
+        throw new Error("Gagal menambahkan proyek");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(projectName);
 
   return (
     <React.Fragment>
@@ -29,12 +54,7 @@ export default function AddProjectModal({ open, setOpen }) {
           <DialogTitle className="font-bold pb-10">
             Tambah Proyek Baru
           </DialogTitle>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              setOpen(false);
-            }}
-          >
+          <form action={handleSubmit}>
             <ModalClose variant="plain" sx={{ m: 1 }} />
             <Stack spacing={2}>
               <FormControl>
