@@ -474,13 +474,13 @@ export default function TableSortAndSelection({ activities }) {
           "--TableCell-headBackground": "transparent",
           "--TableCell-selectedBackground": (theme) =>
             theme.vars.palette.success.softBg,
-          "& thead th:nth-child(1)": {
+          "& thead th:nth-of-type(1)": {
             width: "10px",
           },
-          "& thead th:nth-child(2)": {
+          "& thead th:nth-of-type(2)": {
             width: "15%",
           },
-          "& tr > *:nth-child(n+3)": { textAlign: "left" },
+          "& tr > *:nth-of-type(n+3)": { textAlign: "left" },
         }}
       >
         <EnhancedTableHead
