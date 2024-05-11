@@ -45,6 +45,20 @@ export default function Home() {
     fetchEmployee();
   }, [selectedEmployee]);
 
+  // handling search
+  useEffect(() => {
+    async function searchActivityHandler() {
+      const response = await fetch(
+        `${baseURL}activities/${selectedEmployee}?title=${searchActivity}&ProjectIds=${getIdsAsString(
+          projectName
+        )}`
+      );
+      const data = await response.json();
+      setEmployeeActivities(data);
+    }
+    searchActivityHandler();
+  }, [searchActivity]);
+
   // handling filters
 
   // async function filterActivities () {
