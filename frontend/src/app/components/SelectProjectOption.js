@@ -43,6 +43,7 @@ export default function SelectProjectOption({
       indicator={<KeyboardArrowDown />}
       onChange={handleChange}
       required
+      defaultValue={projectId}
       sx={{
         width: "100%",
         [`& .${selectClasses.indicator}`]: {
@@ -64,7 +65,7 @@ export default function SelectProjectOption({
         + Tambah Proyek
       </Option>
       {projects.map((project) => (
-        <Option key={project.id} value={project.id}>
+        <Option key={project.id} value={project.id} >
           {project.name}
         </Option>
       ))}

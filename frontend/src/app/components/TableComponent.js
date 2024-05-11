@@ -28,6 +28,7 @@ import formatDate from "../utils/formatDate";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
 import formatTime from "../utils/formatTime";
 import DeleteActivityButton from "./DeleteActivityButton";
+import UpdateActivityButton from "./UpdateActivityButton";
 
 function labelDisplayedRows({ from, to, count }) {
   return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
@@ -229,7 +230,7 @@ function EnhancedTableToolbar(props) {
     setEmployeeActivities,
     projectName,
     setProjectName,
-    handleFilter
+    handleFilter,
   } = props;
 
   return (
@@ -295,7 +296,7 @@ export default function TableSortAndSelection({
   fetchActivities,
   projectName,
   setProjectName,
-  handleFilter
+  handleFilter,
 }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
@@ -452,9 +453,11 @@ export default function TableSortAndSelection({
                     <td>{formatTime(row.timeEnd)}</td>
                     <td>{convertMinutesToHours(row.duration)}</td>
                     <td>
-                      <IconButton style={{ color: "red" }} color="warning">
-                        <EditIcon />
-                      </IconButton>
+                      <UpdateActivityButton
+                        id={row.id}
+                        data={row}
+                        fetchActivities={fetchActivities}
+                      />
                       <DeleteActivityButton
                         id={row.id}
                         fetchActivities={fetchActivities}

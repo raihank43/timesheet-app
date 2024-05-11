@@ -7,7 +7,12 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import { Check } from "@mui/icons-material";
 
-export default function SuccessModal({ openSuccess, setOpenSuccess, setOpen }) {
+export default function SuccessModal({
+  openSuccess,
+  setOpenSuccess,
+  setOpen,
+  update,
+}) {
   return (
     <React.Fragment>
       <Modal
@@ -45,7 +50,11 @@ export default function SuccessModal({ openSuccess, setOpenSuccess, setOpen }) {
           >
             Berhasil
           </Typography>
-          <Typography id="modal-desc">Tambah Proyek Baru Berhasil</Typography>
+          <Typography id="modal-desc">
+            {update
+              ? `Perbarui Proyek Berhasil`
+              : "Tambah Proyek Baru Berhasil"}
+          </Typography>
         </Sheet>
       </Modal>
     </React.Fragment>
