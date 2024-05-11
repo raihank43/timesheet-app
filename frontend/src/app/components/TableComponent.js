@@ -377,9 +377,10 @@ function EnhancedTableToolbar(props) {
 
       <Sheet className="flex flex-row gap-5">
         <SearchInput />
-        <Tooltip title="Filter list">
-          <FilterListButton />
-        </Tooltip>
+        {/* <Tooltip title="Filter list">
+         
+        </Tooltip> */}
+        <FilterListButton />
       </Sheet>
     </Box>
   );
@@ -550,7 +551,11 @@ export default function TableSortAndSelection({ activities }) {
               })
           ) : (
             <tr>
-              <td colSpan="9" style={{ textAlign: "center" }} className="font-bold text-gray-400">
+              <td
+                colSpan="9"
+                style={{ textAlign: "center" }}
+                className="font-bold text-gray-400"
+              >
                 Belum ada kegiatan
               </td>
             </tr>
