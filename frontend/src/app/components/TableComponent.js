@@ -28,123 +28,6 @@ import formatDate from "../utils/formatDate";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
 import formatTime from "../utils/formatTime";
 
-// const rows = [
-//   {
-//     id: 3,
-//     title: "Code Review",
-//     ProjectId: 2,
-//     EmployeeId: 1,
-//     startDate: "2022-12-02T00:00:00.000Z",
-//     endDate: "2022-12-02T02:00:00.000Z",
-//     timeStart: "10:00:00",
-//     timeEnd: "12:00:00",
-//     duration: 120,
-//     createdAt: "2024-05-08T12:03:09.426Z",
-//     updatedAt: "2024-05-08T12:03:09.426Z",
-//     Project: {
-//       id: 2,
-//       name: "Dokumentasi",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-//   {
-//     id: 7,
-//     title: "Ngaret",
-//     ProjectId: 2,
-//     EmployeeId: 1,
-//     startDate: "2022-12-04T00:00:00.000Z",
-//     endDate: "2022-12-04T03:00:00.000Z",
-//     timeStart: "08:00:00",
-//     timeEnd: "12:00:00",
-//     duration: 180,
-//     createdAt: "2024-05-08T13:52:17.603Z",
-//     updatedAt: "2024-05-08T13:52:17.603Z",
-//     Project: {
-//       id: 2,
-//       name: "Dokumentasi",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-//   {
-//     id: 9,
-//     title: "tidur",
-//     ProjectId: 2,
-//     EmployeeId: 1,
-//     startDate: "2022-12-04T00:00:00.000Z",
-//     endDate: "2022-12-04T03:00:00.000Z",
-//     timeStart: "09:00:00",
-//     timeEnd: "12:00:00",
-//     duration: 180,
-//     createdAt: "2024-05-08T14:54:59.026Z",
-//     updatedAt: "2024-05-08T23:54:39.472Z",
-//     Project: {
-//       id: 2,
-//       name: "Dokumentasi",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-//   {
-//     id: 13,
-//     title: "Design Graphic",
-//     ProjectId: 3,
-//     EmployeeId: 1,
-//     startDate: "2022-12-04T00:00:00.000Z",
-//     endDate: "2022-12-04T03:00:00.000Z",
-//     timeStart: "09:00:00",
-//     timeEnd: "12:00:00",
-//     duration: 180,
-//     createdAt: "2024-05-09T00:05:04.975Z",
-//     updatedAt: "2024-05-09T00:05:04.975Z",
-//     Project: {
-//       id: 3,
-//       name: "Desain Logo",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-//   {
-//     id: 5,
-//     title: "Training Session",
-//     ProjectId: 1,
-//     EmployeeId: 3,
-//     startDate: "2022-12-04T00:00:00.000Z",
-//     endDate: "2022-12-04T03:00:00.000Z",
-//     timeStart: "09:00:00",
-//     timeEnd: "12:00:00",
-//     duration: 180,
-//     createdAt: "2024-05-08T12:03:09.426Z",
-//     updatedAt: "2024-05-08T12:03:09.426Z",
-//     Project: {
-//       id: 1,
-//       name: "UI Desain",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-//   {
-//     id: 6,
-//     title: "Bug Fixing",
-//     ProjectId: 2,
-//     EmployeeId: 3,
-//     startDate: "2022-12-05T00:00:00.000Z",
-//     endDate: "2022-12-05T01:30:00.000Z",
-//     timeStart: "13:00:00",
-//     timeEnd: "14:30:00",
-//     duration: 90,
-//     createdAt: "2024-05-08T12:03:09.426Z",
-//     updatedAt: "2024-05-08T12:03:09.426Z",
-//     Project: {
-//       id: 2,
-//       name: "Dokumentasi",
-//       createdAt: "2024-05-08T10:42:21.014Z",
-//       updatedAt: "2024-05-08T10:42:21.014Z",
-//     },
-//   },
-// ];
-
 function labelDisplayedRows({ from, to, count }) {
   return `${from}–${to} of ${count !== -1 ? count : `more than ${to}`}`;
 }
@@ -339,7 +222,7 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, selectedEmployee, setEmployeeActivities } = props;
 
   return (
     <Box
@@ -372,7 +255,10 @@ function EnhancedTableToolbar(props) {
         >
           Daftar Kegiatan
         </Typography>
-        <AddActivityButton />
+        <AddActivityButton
+          selectedEmployee={selectedEmployee}
+          setEmployeeActivities={setEmployeeActivities}
+        />
       </Sheet>
 
       <Sheet className="flex flex-row gap-5">
@@ -390,7 +276,11 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function TableSortAndSelection({ activities }) {
+export default function TableSortAndSelection({
+  activities,
+  selectedEmployee,
+  setEmployeeActivities,
+}) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -466,7 +356,11 @@ export default function TableSortAndSelection({ activities }) {
       variant="outlined"
       sx={{ width: "100%", boxShadow: "sm", borderRadius: "sm" }}
     >
-      <EnhancedTableToolbar numSelected={selected.length} />
+      <EnhancedTableToolbar
+        numSelected={selected.length}
+        selectedEmployee={selectedEmployee}
+        setEmployeeActivities={setEmployeeActivities}
+      />
       <Table
         aria-labelledby="tableTitle"
         hoverRow

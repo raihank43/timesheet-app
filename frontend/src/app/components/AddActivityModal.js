@@ -14,41 +14,87 @@ import MenuItem from "@mui/joy/MenuItem";
 import { Sheet } from "@mui/joy";
 import SelectProjectOption from "./SelectProjectOption";
 import { useState } from "react";
+import ErrorSnackBar from "./ErrorSnackBar";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export default function AddActivityModal({ open, setOpen }) {
+export default function AddActivityModal({
+  open,
+  setOpen,
+  selectedEmployee,
+  setEmployeeActivities,
+}) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [title, setTitle] = useState("");
-  const [projectName, setProjectName] = useState("");
+  const [projectId, setProjectId] = useState("");
+  const [openError, setOpenError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [selectedProjectName, setSelectedProjectName] = useState("");
 
   const handleInput = (setter) => (event) => {
     setter(event.target.value);
   };
 
-//   console.log({
-//     title,
-//     projectName,
-//     startDate,
-//     endDate,
-//     startTime,
-//     endTime,
-//   });
+  console.log(
+    {
+      title,
+      projectId,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      selectedEmployee,
+      selectedProjectName
+    },
+    "<<< from add activity modal"
+  );
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(`${baseURL}activities/${selectedEmployee}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          ProjectId: projectId,
+          startDate,
+          endDate,
+          timeStart: startTime,
+          timeEnd: endTime,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Something went wrong");
+      }
+
+      console.log(data, "<<<<< created Data");
+      setOpen(false);
+      // setEmployeeActivities((prev) => [...prev, data]);
+    } catch (error) {
+      console.log(error, "<<<<< error from add activity");
+      setErrorMessage(error.message);
+      setOpenError(true);
+    }
+  };
 
   return (
     <React.Fragment>
+      <ErrorSnackBar
+        open={openError}
+        setOpen={setOpenError}
+        errorMessage={errorMessage}
+      />
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog className="min-w-[500px] ">
           <DialogTitle className="font-bold pb-10">
             Tambah Kegiatan Baru
           </DialogTitle>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              setOpen(false);
-            }}
-          >
+          <form action={handleSubmit}>
             <ModalClose variant="plain" sx={{ m: 1 }} />
             <Stack spacing={2}>
               <Sheet className=" flex flex-row gap-5">
@@ -56,7 +102,6 @@ export default function AddActivityModal({ open, setOpen }) {
                   <FormLabel>Tanggal Mulai</FormLabel>
                   <Input
                     type="date"
-                    required
                     value={startDate}
                     onChange={handleInput(setStartDate)}
                   />
@@ -65,7 +110,6 @@ export default function AddActivityModal({ open, setOpen }) {
                   <FormLabel>Tanggal Akhir</FormLabel>
                   <Input
                     type="date"
-                    required
                     value={endDate}
                     onChange={handleInput(setEndDate)}
                   />
@@ -74,7 +118,6 @@ export default function AddActivityModal({ open, setOpen }) {
                   <FormLabel>Jam Mulai</FormLabel>
                   <Input
                     type="time"
-                    required
                     value={startTime}
                     onChange={handleInput(setStartTime)}
                   />
@@ -83,7 +126,6 @@ export default function AddActivityModal({ open, setOpen }) {
                   <FormLabel>Jam Akhir</FormLabel>
                   <Input
                     type="time"
-                    required
                     value={endTime}
                     onChange={handleInput(setEndTime)}
                   />
@@ -94,7 +136,6 @@ export default function AddActivityModal({ open, setOpen }) {
                 <FormLabel>Judul Kegiatan</FormLabel>
                 <Input
                   autoFocus
-                  required
                   value={title}
                   onChange={handleInput(setTitle)}
                 />
@@ -103,8 +144,9 @@ export default function AddActivityModal({ open, setOpen }) {
               <FormControl>
                 <FormLabel>Nama Proyek</FormLabel>
                 <SelectProjectOption
-                  projectName={projectName}
-                  setProjectName={setProjectName}
+                  projectId={projectId}
+                  setProjectId={setProjectId}
+                  setSelectedProjectName={setSelectedProjectName}
                 />
               </FormControl>
               <Sheet className=" flex justify-end gap-5">

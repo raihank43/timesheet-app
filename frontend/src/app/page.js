@@ -1,19 +1,10 @@
 "use client";
-import Image from "next/image";
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-import { Button, Table } from "@mui/joy";
 import TableComponent from "./components/TableComponent";
-import ButtonComponent from "./components/ButtonComponent";
 import EmployeeDetail from "./components/EmployeeDetail";
 import convertMinutesToHours from "./utils/convertMinuteToHours";
 import formatRupiah from "./utils/formatRupiah";
 import { useState, useEffect } from "react";
-
-// async function fetchEmployees() {
-//   const response = await fetch(`${baseURL}employees`);
-//   const employees = await response.json();
-//   return employees;
-// }
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);
@@ -58,6 +49,8 @@ export default function Home() {
     (acc, activity) => acc + (activity.duration / 60) * employee.rate,
     0
   );
+
+  console.log(employeeActivities, '<<<< employeeactivities')
   return (
     <main className=" min-h-screen m-6 bg-white p-6 rounded-lg  shadow-2xl">
       <EmployeeDetail
@@ -66,7 +59,11 @@ export default function Home() {
         employee={employee}
       />
 
-      <TableComponent activities={employeeActivities} />
+      <TableComponent
+        activities={employeeActivities}
+        selectedEmployee={selectedEmployee}
+        setEmployeeActivities={setEmployeeActivities}
+      />
 
       <div className="flex justify-between mt-4 p-6">
         <div>
