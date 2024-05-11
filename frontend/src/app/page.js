@@ -6,6 +6,7 @@ import convertMinutesToHours from "./utils/convertMinuteToHours";
 import formatRupiah from "./utils/formatRupiah";
 import { useState, useEffect } from "react";
 import getIdsAsString from "./utils/getIdsAsString";
+import calculateOvertime from "./utils/calculateOvertime";
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);
@@ -70,6 +71,10 @@ export default function Home() {
     0
   );
 
+  const overtime = calculateOvertime(employeeActivities, employee.rate);
+
+  console.log(overtime);
+
   // console.log(getIdsAsString(projectName), "<<<<< from page");
 
   return (
@@ -92,18 +97,33 @@ export default function Home() {
 
       <div className="flex justify-between mt-4 p-6">
         <div>
+          <h1 className="text-custom-blue font-bold text-lg">
+            {" "}
+            Total Durasi Overtime
+          </h1>
           <h1 className="text-custom-blue font-bold text-lg">Total Durasi</h1>
           <h1 className="text-custom-blue font-black text-xl">
+            Total Pendapatan Overtime
+          </h1>
+          <h1 className="text-custom-blue font-black text-2xl">
             Total Pendapatan
           </h1>
         </div>
 
         <div className="flex flex-col  justify-end items-end">
           <h1 className="text-custom-blue font-bold text-lg">
+            {convertMinutesToHours(overtime.totalDuration)}
+          </h1>
+          <h1 className="text-custom-blue font-bold text-lg">
             {convertMinutesToHours(duration)}
           </h1>
           <h1 className="text-custom-blue font-black text-xl">
-            {formatRupiah(totalIncome)}
+            {formatRupiah(overtime.totalEarnings)}
+          </h1>
+          <h1 className="text-custom-blue font-black text-2xl">
+            {overtime.totalEarnings > 0
+              ? formatRupiah(totalIncome + overtime.totalEarnings)
+              : formatRupiah(totalIncome)}
           </h1>
         </div>
       </div>
