@@ -4,9 +4,9 @@ import Button from "@mui/joy/Button";
 import Box from "@mui/joy/Box";
 import Papa from "papaparse";
 import formatDate from "../utils/formatDate";
-import formatRupiah from "../utils/formatRupiah";
 import formatTime from "../utils/formatTime";
 import convertMinutesToHours from "../utils/convertMinuteToHours";
+import formatCurrencyExport from "../utils/formatCurrencyExport";
 
 export default function ExportCSVButton({
   employeeActivities,
@@ -29,7 +29,7 @@ export default function ExportCSVButton({
   const handleExport = () => {
     const employeeInfo = {
       "Nama Karyawan": employee.name,
-      Rate: `${formatRupiah(employee.rate)} / hour`,
+      Rate: `Rp${formatCurrencyExport(employee.rate)} / hour`,
     };
 
     // Convert the employee info to CSV
@@ -45,14 +45,20 @@ export default function ExportCSVButton({
     // add total duration and total income
     const total = {
       "Total Durasi": convertMinutesToHours(duration),
-      "Total Pendapatan": formatRupiah(totalIncome),
+      "Total Pendapatan": `Rp${formatCurrencyExport(totalIncome)}`,
       "Total Lembur": overtime.totalDuration
         ? convertMinutesToHours(overtime.totalDuration)
         : 0,
       "Total Pendapatan (Termasuk Lembur)":
         overtime.totalEarnings > 0
-          ? formatRupiah(totalIncome + overtime.totalEarnings)
-          : formatRupiah(totalIncome),
+          ? `Rp${formatCurrencyExport(
+              totalIncome + overtime.totalEarnings,
+              "id"
+            )}`
+          : `Rp${formatCurrencyExport(
+              totalIncome + overtime.totalEarnings,
+              "id"
+            )}`,
     };
     csv += Papa.unparse([total], { delimiter: ";" });
     const blob = new Blob([csv], { type: "text/csv" });

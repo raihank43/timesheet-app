@@ -3,6 +3,7 @@ export default function calculateOvertime(activities, rate) {
   let totalEarnings = 0;
 
   activities.forEach((activity) => {
+    // console.log(activity.timeStart, activity.timeEnd)
     const start = new Date(`1970-01-01T${activity.timeStart}Z`);
     const end = new Date(`1970-01-01T${activity.timeEnd}Z`);
     const nineAM = new Date("1970-01-01T09:00:00Z");
@@ -23,7 +24,7 @@ export default function calculateOvertime(activities, rate) {
 
     if (duration > 0) {
       totalDuration += duration;
-      totalEarnings += duration / 60 * rate * 1.3 ;
+      totalEarnings += (duration / 60) * rate * 0.3;
     }
   });
 
